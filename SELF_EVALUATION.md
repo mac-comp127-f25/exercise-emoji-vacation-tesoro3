@@ -4,7 +4,7 @@
 
 ### Correctness
 
-- [ ] Image background shows trees 60% of the time, and mountains 50% of the time (mountains and trees may both appear in one image)
+- [x] Image background shows trees 60% of the time, and mountains 50% of the time (mountains and trees may both appear in one image)
 - [ ] The program draws a “family” of emojis, containing a number of emojis based on the parameters to `createFamily()`
 - [ ] Each emoji in the family is randomly selected, based on your implementation of `createRandomEmoji()`
 - [ ] When run, your program iterates through an endless slideshow of these emoji photos, each with randomized backgrounds and emoji styles
