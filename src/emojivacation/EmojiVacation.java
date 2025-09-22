@@ -3,6 +3,7 @@ package emojivacation;
 import edu.macalester.graphics.*;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -54,10 +55,10 @@ public class EmojiVacation {
         }
 
         List<GraphicsGroup> family = createFamily(2, 3);
-        positionFamily(family, 60, 550, 20);
         for (GraphicsGroup familyMember : family) {
             canvas.add(familyMember);
         }
+        positionFamily(family, 60, 550, 20);
     }
 
     // –––––– Emoji family –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -72,9 +73,14 @@ public class EmojiVacation {
         // Hint: You can't use List.of() to do this, because you don't know the size of the
         // resulting list before the code actually runs. What can you use?
         //
-        return List.of(
-            createRandomEmoji(adultSize),
-            createRandomEmoji(childSize));
+        List<GraphicsGroup> family = new ArrayList<>();
+        for (int i = 0; i < adultCount; i++) {
+            family.add(createRandomEmoji(adultSize));
+        }
+        for (int i = 0; i < childCount; i++) {
+            family.add(createRandomEmoji(childSize));
+        }
+        return family;
     }
 
     private static GraphicsGroup createRandomEmoji(double size) {
@@ -103,6 +109,11 @@ public class EmojiVacation {
         //
         // The bottom of each emoji should be baselineY. But setPosition() sets the _top_! How do you set the bottom to
         // a given position? (Hint: you can ask any graphics object for its height.)
+        double currentXPosition = leftX;
+        for (GraphicsGroup familyMember : family) {
+            familyMember.setPosition(currentXPosition, baselineY - familyMember.getHeight());
+            currentXPosition += familyMember.getWidth() + spacing;
+        }
     }
 
     // –––––– Scenery ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
