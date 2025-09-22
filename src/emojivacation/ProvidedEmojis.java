@@ -26,7 +26,9 @@ public class ProvidedEmojis {
             createFrownyFace(130),
             createWinkingFace(160),
             createNauseousFace(190),
-            createContentedFace(210)
+            createContentedFace(210),
+            createDisappointedFace(240),
+            createCoolFace(270)
         );
 
         double x = 20;
@@ -149,6 +151,47 @@ public class ProvidedEmojis {
         return group;
     }
 
+    public static GraphicsGroup createDisappointedFace(double size) {
+        GraphicsGroup group = new GraphicsGroup();
+
+        group.add(createHead(size, size));
+
+        GraphicsGroup leftEye = createEye (0.1 * size);
+        GraphicsGroup rightEye = createEye (0.1 * size);
+        leftEye.setCenter(size * 0.3, size * 0.35);
+        rightEye.setCenter(size * 0.7, size * 0.35);
+        group.add(leftEye);
+        group.add(rightEye);
+
+        Line mouth = createTiltedMouth(size);
+        group.add(mouth);
+
+        return group;
+    }
+
+    public static GraphicsGroup createCoolFace(double size) {
+        GraphicsGroup group = new GraphicsGroup();
+
+        group.add(createHead(size, size));
+
+        Rectangle left = createSunglasses(size);
+        Rectangle right = createSunglasses(size);
+        left.setCenter(size * 0.3, size * 0.35);
+        right.setCenter(size * 0.7, size * 0.35);
+        Line bridge = new Line (size * 0.3, size * 0.35, size * 0.7, size * 0.35);
+        bridge.setStrokeColor(PUPIL_COLOR);
+        bridge.setStrokeWidth(4);
+        group.add(left);
+        group.add(right);
+        group.add(bridge);
+
+        Arc mouth = createSmile(size * 0.6, size * 0.5);
+        mouth.setCenter(size * 0.5, size * 0.75);
+        group.add(mouth);
+
+        return group;
+    }
+
     private static GraphicsGroup createEye(double size) {
         GraphicsGroup eye = new GraphicsGroup();
 
@@ -207,5 +250,18 @@ public class ProvidedEmojis {
         mouth.setStrokeColor(MOUTH_COLOR);
         mouth.setStrokeWidth(4);
         return mouth;
+    }
+
+    private static Line createTiltedMouth (double size) {
+        Line mouth = new Line(size * 0.3, size * 0.7, size * 0.7, size * 0.5);
+        mouth.setStrokeColor(MOUTH_COLOR);
+        mouth.setStrokeWidth(4);
+        return mouth;
+    }
+
+    private static Rectangle createSunglasses (double size) {
+        Rectangle sunglasses = new Rectangle(0, 0, size * 0.3, size * 0.2);
+        sunglasses.setFillColor(PUPIL_COLOR);
+        return sunglasses;
     }
 }
